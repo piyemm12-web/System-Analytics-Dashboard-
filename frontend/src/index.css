@@ -85,7 +85,7 @@ body {
   flex-grow: 1;
 }
 
-/* Browser Titlebar */
+
 .browser-titlebar {
   display: flex;
   align-items: center;
