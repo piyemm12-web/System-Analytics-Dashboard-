@@ -55,12 +55,12 @@ export default function App() {
     );
   }
 
-  // Calculate storage average utilization
+  
   const avgDiskPercent = snapshot.disks && snapshot.disks.length > 0
     ? snapshot.disks.reduce((acc, d) => acc + d.percent, 0) / snapshot.disks.length
     : 0;
 
-  // Filter and sort tasks list
+  
   const filteredProcesses = processes.filter(p => 
     p.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
@@ -76,7 +76,7 @@ export default function App() {
       : (valB as number) - (valA as number);
   });
 
-  // High-performance SVG charting logic matching screenshot coordinates
+  
   const renderHistoryChart = () => {
     if (history.length < 2) return <div className="no-data">Buffering metric vectors...</div>;
     const width = 1000;
@@ -106,7 +106,7 @@ export default function App() {
     );
   };
 
-  // Convert current tab to display path in Address bar
+  
   const getDisplayUrl = () => {
     switch (currentTab) {
       case 'overview': return 'https://sysmon.local/dashboard';
