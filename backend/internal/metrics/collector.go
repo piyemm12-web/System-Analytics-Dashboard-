@@ -34,13 +34,13 @@ func NewCollector() *Collector {
 		procCache: make(map[int32]*process.Process),
 	}
 
-	// Pre-populate with 24 hours of simulated history (288 points at 5-minute intervals)
+	
 	now := time.Now()
 	for i := 0; i < 288; i++ {
 		offset := time.Duration(288-i) * 5 * time.Minute
 		t := now.Add(-offset)
 
-		// Generate realistic smooth waveforms
+		
 		x := float64(i)
 		cpuVal := 15.0 + 10.0*math.Sin(x*0.05) + 5.0*math.Sin(x*0.2) + rand.Float64()*8.0
 		if cpuVal < 2.0 {
@@ -63,10 +63,10 @@ func NewCollector() *Collector {
 		}
 	}
 
-	// Start history recorder
+	
 	go c.startHistoryRecorder()
 
-	// Start concurrent process scanner
+	
 	go c.startProcessScanner()
 
 	return c
@@ -90,7 +90,6 @@ func (c *Collector) startHistoryRecorder() {
 		c.historyMu.Lock()
 		c.tickCount++
 
-		// Every 5 minutes (30 ticks of 10s), append a new historical point and shift
 		if c.tickCount >= 30 {
 			c.tickCount = 0
 			c.history = c.history[1:]
@@ -100,7 +99,7 @@ func (c *Collector) startHistoryRecorder() {
 				RAMUsage:  ramUsage,
 			})
 		} else {
-			// Update the current rightmost point in real-time
+			
 			if len(c.history) > 0 {
 				lastIdx := len(c.history) - 1
 				c.history[lastIdx].Timestamp = time.Now().Format("15:04")
@@ -121,7 +120,7 @@ func (c *Collector) GetHistory() []model.SystemHistoryPoint {
 }
 
 func (c *Collector) startProcessScanner() {
-	// Poll every 3 seconds to keep metrics fresh
+	
 	ticker := time.NewTicker(3 * time.Second)
 	c.scanProcesses()
 	for range ticker.C {
@@ -141,7 +140,7 @@ func (c *Collector) scanProcesses() {
 	}
 
 	c.processMu.Lock()
-	// Clean up cache of dead processes
+	
 	for pid := range c.procCache {
 		if !currentPIDs[pid] {
 			delete(c.procCache, pid)
@@ -156,7 +155,7 @@ func (c *Collector) scanProcesses() {
 	var activeProcs []model.ProcessInfo
 	var mu sync.Mutex
 
-	sem := make(chan struct{}, 16) // Concurrency limit
+	sem := make(chan struct{}, 16) 
 
 	for _, p := range procs {
 		pid := p.Pid
@@ -243,7 +242,7 @@ func (c *Collector) KillProcess(pid int32) error {
 func (c *Collector) GetSystemSnapshot() (model.SystemSnapshot, error) {
 	var snap model.SystemSnapshot
 
-	// CPU Processing
+	
 	overall, _ := cpu.Percent(0, false)
 	if len(overall) > 0 {
 		snap.CPU.Overall = overall[0]
@@ -259,7 +258,7 @@ func (c *Collector) GetSystemSnapshot() (model.SystemSnapshot, error) {
 		snap.CPU.Load15Min = snap.CPU.Load1Min * 0.90
 	}
 
-	// Memory Processing
+	
 	vMem, _ := mem.VirtualMemory()
 	if vMem != nil {
 		snap.Memory = model.MemoryStats{
@@ -276,7 +275,7 @@ func (c *Collector) GetSystemSnapshot() (model.SystemSnapshot, error) {
 		}
 	}
 
-	// Disk Storage Processing
+	
 	partitions, _ := disk.Partitions(false)
 	for _, part := range partitions {
 		usage, err := disk.Usage(part.Mountpoint)
@@ -291,7 +290,7 @@ func (c *Collector) GetSystemSnapshot() (model.SystemSnapshot, error) {
 		}
 	}
 
-	// Network Traffic IO Processing
+	
 	ioStats, _ := net.IOCounters(false)
 	if len(ioStats) > 0 {
 		snap.Network = model.NetworkStats{
@@ -302,7 +301,7 @@ func (c *Collector) GetSystemSnapshot() (model.SystemSnapshot, error) {
 		}
 	}
 
-	// System Temperature Profiling
+	
 	temps, _ := host.SensorsTemperatures()
 	if len(temps) > 0 {
 		snap.Temperature = temps[0].Temperature
@@ -310,7 +309,7 @@ func (c *Collector) GetSystemSnapshot() (model.SystemSnapshot, error) {
 		snap.Temperature = 38.0 + rand.Float64()*12.0
 	}
 
-	// Host Tracking Data
+	
 	hostInfo, _ := host.Info()
 	if hostInfo != nil {
 		snap.Uptime = hostInfo.Uptime
