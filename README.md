@@ -4,7 +4,6 @@
 [![React](https://img.shields.io/badge/React-18-61DAFB?style=flat&logo=react)](https://reactjs.org)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?style=flat&logo=typescript)](https://www.typescriptlang.org)
 [![Vite](https://img.shields.io/badge/Vite-5-646CFF?style=flat&logo=vite)](https://vitejs.dev)
-[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
 A real-time, low-overhead system telemetry dashboard built to monitor, analyze, and visualize host infrastructure performance. The application couples a high-performance **Go** kernel with a responsive **React & TypeScript** frontend to deliver live hardware metrics, process distributions, and historical trends with minimal CPU footprint.
 
@@ -234,9 +233,3 @@ cd frontend
 npm.cmd run build
 ```
 Production assets are generated in `frontend/dist/` ready to be served via Nginx or embedded into the Go binary.
-
----
-
-## License
-
-This project is licensed under the MIT License.
