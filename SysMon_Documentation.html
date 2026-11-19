@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>SysMon - Full-Stack Telemetry & System Monitoring Dashboard</title>
+<style>
+  @page {
+    size: A4;
+    margin: 16mm 14mm 16mm 14mm;
+    @bottom-right {
+      content: counter(page);
+    }
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    color: #1e293b;
+    line-height: 1.55;
+    font-size: 13.5px;
+    margin: 0;
+    padding: 0;
+    background: #ffffff;
+  }
+
+  .header {
+    border-bottom: 2px solid #0f172a;
+    padding-bottom: 14px;
+    margin-bottom: 22px;
+  }
+
+  .header h1 {
+    font-size: 26px;
+    margin: 0 0 6px 0;
+    color: #0f172a;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+  }
+
+  .subtitle {
+    font-size: 13px;
+    color: #475569;
+    margin: 0 0 10px 0;
+  }
+
+  .badge-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+  }
+
+  .badge {
+    display: inline-block;
+    padding: 3px 9px;
+    font-size: 11px;
+    font-weight: 600;
+    border-radius: 4px;
+    background: #f1f5f9;
+    color: #334155;
+    border: 1px solid #cbd5e1;
+  }
+
+  .badge-primary {
+    background: #e0f2fe;
+    color: #0369a1;
+    border-color: #bae6fd;
+  }
+
+  .badge-accent {
+    background: #dcfce7;
+    color: #15803d;
+    border-color: #bbf7d0;
+  }
+
+  h2 {
+    font-size: 18px;
+    color: #0f172a;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 6px;
+    margin-top: 24px;
+    margin-bottom: 12px;
+    page-break-after: avoid;
+  }
+
+  h3 {
+    font-size: 14.5px;
+    color: #1e293b;
+    margin-top: 14px;
+    margin-bottom: 6px;
+    page-break-after: avoid;
+  }
+
+  p {
+    margin: 0 0 10px 0;
+  }
+
+  ul, ol {
+    margin: 0 0 12px 0;
+    padding-left: 22px;
+  }
+
+  li {
+    margin-bottom: 4px;
+  }
+
+  code {
+    font-family: "JetBrains Mono", Consolas, "Courier New", monospace;
+    font-size: 12px;
+    background: #f1f5f9;
+    padding: 2px 5px;
+    border-radius: 4px;
+    border: 1px solid #e2e8f0;
+    color: #b91c1c;
+  }
+
+  pre {
+    background: #0f172a;
+    color: #e2e8f0;
+    padding: 12px 14px;
+    border-radius: 6px;
+    font-size: 11.5px;
+    font-family: "JetBrains Mono", Consolas, monospace;
+    overflow-x: auto;
+    margin: 8px 0 14px 0;
+    line-height: 1.45;
+  }
+
+  pre code {
+    background: transparent;
+    padding: 0;
+    border: none;
+    color: inherit;
+    font-size: inherit;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin: 12px 0;
+  }
+
+  .card {
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 12px 14px;
+    background: #f8fafc;
+    page-break-inside: avoid;
+  }
+
+  .card h4 {
+    margin: 0 0 6px 0;
+    font-size: 13.5px;
+    color: #0f172a;
+  }
+
+  .card p {
+    font-size: 12px;
+    color: #475569;
+    margin: 0;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 10px 0 16px 0;
+    font-size: 12px;
+    page-break-inside: avoid;
+  }
+
+  th, td {
+    padding: 7px 10px;
+    border: 1px solid #cbd5e1;
+    text-align: left;
+  }
+
+  th {
+    background: #f1f5f9;
+    font-weight: 700;
+    color: #1e293b;
+  }
+
+  .page-break {
+    page-break-before: always;
+  }
+
+  .callout {
+    background: #f0fdf4;
+    border-left: 4px solid #22c55e;
+    padding: 10px 14px;
+    border-radius: 0 6px 6px 0;
+    margin: 12px 0;
+    font-size: 12.5px;
+    color: #166534;
+  }
+
+  .callout-warn {
+    background: #fffbeb;
+    border-left: 4px solid #f59e0b;
+    color: #92400e;
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>SysMon: System Telemetry & Resource Dashboard</h1>
+  <div class="subtitle">Comprehensive Technical Specification, Architecture Overview, and Run Guide</div>
+  <div class="badge-row">
+    <span class="badge badge-primary">Backend: Go 1.22+</span>
+    <span class="badge badge-accent">Frontend: React 18 + TypeScript + Vite</span>
+    <span class="badge">Engine: gopsutil v3</span>
+    <span class="badge">Architecture: Micro-telemetry REST</span>
+  </div>
+</div>
+
+<h2>1. Executive Project Summary</h2>
+<p>
+  <strong>SysMon</strong> is a production-grade, real-time system telemetry and process monitoring dashboard. Built with a modular micro-telemetry kernel in <strong>Go</strong> and a low-latency UI in <strong>React and TypeScript</strong>, SysMon provides deep observability into hardware metrics, storage volumes, network throughput, and active OS threads with minimal memory and CPU overhead.
+</p>
+
+<h2>2. System Architecture & Directory Tree</h2>
+<p>
+  The project separates low-level host metrics extraction from client visualization via a RESTful HTTP bridge:
+</p>
+<pre><code>sysmon/
+├── backend/                               # Go Telemetry Daemon
+│   ├── cmd/server/main.go                 # HTTP server entrypoint & CORS middleware
+│   ├── internal/
+│   │   ├── handler/handler.go             # Route handlers (/api/stats, /api/processes, etc.)
+│   │   ├── metrics/collector.go           # Low-level OS counters & background polling goroutines
+│   │   └── model/stats.go                 # Strongly-typed telemetry models
+│   ├── go.mod & go.sum                    # Go module dependencies
+│   └── server.exe                         # Compiled executable binary
+│
+└── frontend/                              # Single Page Application
+    ├── src/
+    │   ├── hooks/useStats.ts              # Data polling hook (3s metrics, 5s process list)
+    │   ├── types/index.ts                 # TypeScript type definitions
+    │   ├── App.tsx                        # Laptop mockup UI shell & tab views
+    │   ├── utils.ts                       # Unit conversions (bytes, uptime formatting)
+    │   └── index.css                      # Custom theme styles & SVG vector styling
+    ├── package.json & tsconfig.json       # Node package & TypeScript config
+    └── vite.config.ts                     # Bundler config & local API reverse proxy</code></pre>
+
+<h2>3. Technology Stack & Technical Highlights</h2>
+
+<div class="grid">
+  <div class="card">
+    <h4>Backend: Go (Golang)</h4>
+    <p>
+      Utilizes <code>gopsutil/v3</code> to query cross-platform kernel counters (CPU, RAM, Disks, Network, OS Processes, Temperatures). Uses background goroutines with mutex locks and concurrency semaphores (16 workers) to avoid blocking HTTP requests.
+    </p>
+  </div>
+  <div class="card">
+    <h4>Frontend: React + Vite + TypeScript</h4>
+    <p>
+      Vite 5 with SWC compilation provides instantaneous hot module replacement. Built with custom SVG area and polyline curves to render continuous processor activity baselines with 60 FPS fluidity and zero bloated chart library overhead.
+    </p>
+  </div>
+</div>
+
+<h3>Telemetry Engine Features:</h3>
+<ul>
+  <li><strong>Safe In-Memory Ring Buffer</strong>: A 288-point sliding window maintains 24-hour historical telemetry data at 5-minute aggregation intervals with real-time 10-second updates.</li>
+  <li><strong>Concurrent Process Scanner</strong>: Gathers top 50 active processes sorted by CPU and memory consumption. Uses process cache preservation and context deadlines (1500ms timeout) to prevent hung process inspection.</li>
+  <li><strong>Process Termination API</strong>: Provides a guarded <code>/api/processes/kill</code> endpoint supporting both query parameters and JSON body payloads to terminate runaway processes.</li>
+</ul>
+
+<div class="page-break"></div>
+
+<h2>4. REST API Endpoint Reference</h2>
+<table>
+  <thead>
+    <tr>
+      <th style="width: 20%;">Endpoint</th>
+      <th style="width: 12%;">Method</th>
+      <th style="width: 28%;">Description</th>
+      <th style="width: 40%;">Sample Payload Structure</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>/api/stats</code></td>
+      <td><code>GET</code></td>
+      <td>Full snapshot of CPU, RAM, Disks, Network, Uptime, and Temp</td>
+      <td><code>{"cpu":{...},"memory":{...},"disks":[...],"network":{...},"uptime":41230}</code></td>
+    </tr>
+    <tr>
+      <td><code>/api/cpu-history</code></td>
+      <td><code>GET</code></td>
+      <td>Historical sampling points for timeline rendering</td>
+      <td><code>[{"timestamp":"14:05","cpuUsage":24.5,"ramUsage":58.2}, ...]</code></td>
+    </tr>
+    <tr>
+      <td><code>/api/processes</code></td>
+      <td><code>GET</code></td>
+      <td>Top 50 running OS processes sorted by CPU load</td>
+      <td><code>[{"pid":1402,"name":"chrome.exe","cpuPercent":3.4,"memoryPercent":1.2}, ...]</code></td>
+    </tr>
+    <tr>
+      <td><code>/api/processes/kill</code></td>
+      <td><code>POST / GET</code></td>
+      <td>Terminates a target process by PID</td>
+      <td><code>Query: ?pid=1234</code> or Body: <code>{"pid":1234}</code></td>
+    </tr>
+    <tr>
+      <td><code>/health</code></td>
+      <td><code>GET</code></td>
+      <td>Service heartbeat status check</td>
+      <td><code>{"status":"healthy"}</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>5. User Interface Views & Visual Modules</h2>
+<ul>
+  <li><strong>Overview View</strong>: Aggregated telemetry cards with gauge meters (CPU core load, RAM saturation, storage volume, outbound network) alongside continuous 10s-sampled SVG curve charts.</li>
+  <li><strong>CPU Core View</strong>: Per-core utilization bar matrix (displaying all available logical cores) plus 1-min, 5-min, and 15-min scheduler load averages.</li>
+  <li><strong>RAM Space View</strong>: Granular visual breakdown between active physical RAM (used vs total) and virtual paging swap space.</li>
+  <li><strong>Partitions View</strong>: Mounted file-system volumes showing absolute capacities, mount points (e.g. <code>C:\</code>, <code>/dev/sda</code>), and percentage bars.</li>
+  <li><strong>Network IO View</strong>: Byte counters and cumulative packet transmission matrices (TX/RX).</li>
+  <li><strong>Tasks (Process Manager)</strong>: Full process table with instant search filtering, bi-directional column sorting, and process termination dispatch.</li>
+</ul>
+
+<h2>6. Step-by-Step Running Guide</h2>
+
+<div class="callout">
+  <strong>Prerequisites Installed</strong>: Go 1.22+ and Node.js v18+ with npm.
+</div>
+
+<h3>Step 1: Launch the Backend Service</h3>
+<p>Open a PowerShell terminal in the repository root and run:</p>
+<pre><code>cd c:\Users\LENOVO\sysmon\backend
+go run cmd/server/main.go</code></pre>
+<p><em>Or alternatively execute the pre-built binary:</em></p>
+<pre><code>cd c:\Users\LENOVO\sysmon\backend
+.\server.exe</code></pre>
+<p>The backend will initialize and output: <code>🚀 Modular Telemetry Kernel online mapping infrastructure to port :8080</code>.</p>
+
+<h3>Step 2: Launch the Frontend Development Server</h3>
+<p>Open a second terminal window and run:</p>
+<pre><code>cd c:\Users\LENOVO\sysmon\frontend
+npm.cmd run dev</code></pre>
+
+<div class="callout callout-warn">
+  <strong>PowerShell Note:</strong> If PowerShell displays a script execution policy error for <code>npm</code>, use <code>npm.cmd run dev</code> or launch via Command Prompt (<code>cmd /c npm run dev</code>).
+</div>
+
+<h3>Step 3: Access the Live Dashboard</h3>
+<p>Open your browser and navigate to:</p>
+<pre><code>http://localhost:3000</code></pre>
+<p>The dashboard connects immediately to the Go backend bridge on port <code>8080</code> and streams real-time telemetry.</p>
+
+</body>
+</html>
+

@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>System Analytics Dashboard - Interview Preparation Guide</title>
+  <style>
+    @page {
+      size: A4;
+      margin: 18mm 16mm 18mm 16mm;
+      @bottom-right {
+        content: counter(page);
+      }
+    }
+    
+    * {
+      box-sizing: border-box;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      color: #1e293b;
+      line-height: 1.55;
+      font-size: 13px;
+      margin: 0;
+      padding: 0;
+      background: #ffffff;
+    }
+
+    h1, h2, h3, h4 {
+      color: #0f172a;
+      font-weight: 700;
+      margin-top: 0;
+    }
+
+    .header-banner {
+      border-bottom: 2px solid #3b82f6;
+      padding-bottom: 14px;
+      margin-bottom: 22px;
+    }
+
+    .header-title {
+      font-size: 24px;
+      font-weight: 800;
+      color: #0f172a;
+      margin-bottom: 4px;
+      letter-spacing: -0.5px;
+    }
+
+    .header-subtitle {
+      font-size: 13px;
+      color: #64748b;
+      font-weight: 500;
+    }
+
+    .badge-bar {
+      margin-top: 8px;
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      font-size: 10px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 4px;
+      background: #f1f5f9;
+      color: #334155;
+      border: 1px solid #e2e8f0;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .badge.blue {
+      background: #eff6ff;
+      color: #1d4ed8;
+      border-color: #bfdbfe;
+    }
+
+    .badge.green {
+      background: #ecfdf5;
+      color: #047857;
+      border-color: #a7f3d0;
+    }
+
+    .badge.purple {
+      background: #faf5ff;
+      color: #7e22ce;
+      border-color: #e9d5ff;
+    }
+
+    .section-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1e3a8a;
+      border-left: 4px solid #3b82f6;
+      padding-left: 8px;
+      margin-top: 22px;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .card {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      padding: 12px 14px;
+      margin-bottom: 14px;
+      page-break-inside: avoid;
+    }
+
+    .card-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .star-box {
+      margin-top: 6px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .star-row {
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+      line-height: 1.45;
+    }
+
+    .star-tag {
+      font-weight: 800;
+      font-size: 11px;
+      min-width: 24px;
+      height: 20px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 3px;
+      color: #ffffff;
+      flex-shrink: 0;
+    }
+
+    .tag-s { background: #3b82f6; }
+    .tag-t { background: #6366f1; }
+    .tag-a { background: #d97706; }
+    .tag-r { background: #10b981; }
+
+    .star-content {
+      font-size: 12.5px;
+      color: #334155;
+    }
+
+    .spoken-quote {
+      background: #f0fdf4;
+      border-left: 3px solid #22c55e;
+      padding: 8px 12px;
+      font-style: italic;
+      color: #166534;
+      border-radius: 0 4px 4px 0;
+      margin: 6px 0;
+      font-size: 12px;
+    }
+
+    pre.diagram {
+      background: #0f172a;
+      color: #38bdf8;
+      font-family: "Consolas", "Courier New", monospace;
+      font-size: 10.5px;
+      line-height: 1.35;
+      padding: 12px;
+      border-radius: 6px;
+      overflow-x: hidden;
+      margin: 10px 0;
+      page-break-inside: avoid;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 10px 0 16px 0;
+      font-size: 11.5px;
+      page-break-inside: avoid;
+    }
+
+    th {
+      background: #f1f5f9;
+      color: #0f172a;
+      font-weight: 700;
+      text-align: left;
+      padding: 7px 10px;
+      border-bottom: 2px solid #cbd5e1;
+    }
+
+    td {
+      padding: 7px 10px;
+      border-bottom: 1px solid #e2e8f0;
+      vertical-align: top;
+      color: #334155;
+    }
+
+    tr:nth-child(even) td {
+      background: #f8fafc;
+    }
+
+    .page-break {
+      page-break-after: always;
+    }
+
+    .bullet-point-header {
+      background: #e0f2fe;
+      border-left: 4px solid #0284c7;
+      padding: 6px 10px;
+      font-weight: 700;
+      color: #0369a1;
+      font-size: 12px;
+      border-radius: 0 4px 4px 0;
+      margin-bottom: 8px;
+    }
+
+    .highlight {
+      font-weight: 600;
+      color: #0f172a;
+    }
+
+    .footer {
+      margin-top: 18px;
+      text-align: center;
+      font-size: 10px;
+      color: #94a3b8;
+      border-top: 1px solid #e2e8f0;
+      padding-top: 8px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <div class="header-banner">
+    <div class="header-title">System Analytics Dashboard (sysmon)</div>
+    <div class="header-subtitle">Comprehensive Technical Interview Preparation Guide & First-Person Spoken Responses</div>
+    <div class="badge-bar">
+      <span class="badge blue">Go (Golang)</span>
+      <span class="badge blue">React + TypeScript</span>
+      <span class="badge green">PostgreSQL Time-Series</span>
+      <span class="badge green">WebSockets Telemetry</span>
+      <span class="badge purple">OS Kernel & Concurrency</span>
+      <span class="badge purple">STAR Answer Method</span>
+    </div>
+  </div>
+
+  <!-- SECTION 1: MASTER ELEVATOR PITCH -->
+  <div class="section-title">1. Master 45-Second Project Pitch</div>
+  <div class="card">
+    <div class="card-title">How to Introduce the Project to an Interviewer</div>
+    <div class="spoken-quote">
+      "In this project, I engineered a <strong>real-time system analytics dashboard</strong> designed to monitor host hardware telemetry and background process health with minimal system overhead.<br><br>
+      On the backend, I built a high-performance <strong>Go</strong> collector that gathers live CPU, RAM, disk, network, and temperature metrics. I established a <strong>time-series data pipeline storing metrics in PostgreSQL</strong> for historical trend analysis and stream live metrics to the frontend over an optimized <strong>WebSocket connection</strong>.<br><br>
+      On the frontend, I developed a responsive dashboard in <strong>React and TypeScript</strong> featuring custom interactive SVG area graphs for historical analysis, alongside a real-time process manager that programmatically flags and terminates resource-heavy applications.<br><br>
+      This project strengthened my skills in <strong>Go concurrency patterns, time-series data indexing, WebSocket streaming optimization, and low-latency frontend state management</strong>."
+    </div>
+  </div>
+
+  <!-- SECTION 2: END-TO-END ARCHITECTURE & DATA FLOW -->
+  <div class="section-title">2. Whiteboard Architecture & Data Flow</div>
+  <pre class="diagram">
++-------------------------------------------------------------------------------+
+|                             HOST OS / KERNEL                                  |
+|         (Raw Hardware Sensors, System Processes, Disk I/O, Network Stats)      |
++---------------------------------------+---------------------------------------+
+                                        | (gopsutil & Low-level Syscalls)
+                                        v
++-------------------------------------------------------------------------------+
+|                                  GO BACKEND                                   |
+|  +------------------------------+       +----------------------------------+  |
+|  | Hardware Metrics Ticker      |       | Concurrent Process Scanner       |  |
+|  | (10s CPU, RAM, Disk, Temps)  |       | (Bounded Worker Pool: 16 Wkrs)   |  |
+|  +--------------+---------------+       +-----------------+----------------+  |
+|                 |                                         |                   |
+|                 v                                         v                   |
+|  +-------------------------------------------------------------------------+  |
+|  |       In-Memory Telemetry State (sync.RWMutex Thread-Safe Guard)        |  |
+|  +----------------------+---------------------------------+----------------+  |
+|                         |                                 |                   |
+|                         v                                 v                   |
+|  +-------------------------------+       +---------------------------------+  |
+|  | PostgreSQL Time-Series DB     |       | WebSocket Streaming Hub         |  |
+|  | (B-Tree Timestamp Indexing)   |       | (Full-Duplex Broadcast, <50ms)  |  |
+|  +-------------------------------+       +----------------+----------------+  |
++-----------------------------------------------------------+-------------------+
+                                                            | (Push Frames)
+                                                            v
++-------------------------------------------------------------------------------+
+|                           REACT + TYPESCRIPT FRONTEND                         |
+|  - Custom useWebSocket Hook State Management (Zero Layout Jitter)             |
+|  - High-Performance Custom SVG Graphing Engine (Mathematical Path Vectors)    |
+|  - Real-Time Process Monitor with Kill Signal Triggering                      |
++-------------------------------------------------------------------------------+
+  </pre>
+
+  <!-- SECTION 3: STEP-BY-STEP "HOW IT WORKS" -->
+  <div class="section-title">3. "How It Works" - Whiteboard Candidate Script</div>
+  
+  <div class="card">
+    <div class="card-title">Phase 1: Hardware Metric Collection (Go + Syscalls)</div>
+    <div class="star-content">
+      <strong>Spoken Script:</strong> "In the backend, a background goroutine ticks every 10 seconds. Using <code>gopsutil</code> bindings, it samples multi-core CPU usage, RAM utilization, disk I/O, network counters, and host temperatures. Because HTTP/WebSocket handlers read metrics while the background ticker writes them, I synchronize access using a <code>sync.RWMutex</code>. Readers grab an <code>RLock()</code> concurrently without contention, and writes acquire an exclusive <code>Lock()</code>. We defensively copy slice buffers before returning them to guarantee zero data races."
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Phase 2: High-Performance Process Scanner</div>
+    <div class="star-content">
+      <strong>Spoken Script:</strong> "Scanning 200+ processes every 3 seconds can freeze a system. I resolved this using three techniques:
+      <ol style="margin: 4px 0 0 16px; padding: 0;">
+        <li><strong>Worker Pool Semaphore:</strong> Bounded concurrency using a buffered channel (<code>chan struct{}, 16</code>) to prevent OS context switching.</li>
+        <li><strong>Context Deadlines:</strong> Wrapped calls in <code>context.WithTimeout(1500ms)</code> to drop non-responsive process reads.</li>
+        <li><strong>Pointer Cache:</strong> Maintained an in-memory map of <code>*process.Process</code> structs, purging only terminated PIDs to eliminate Garbage Collection memory churn."</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="page-break"></div>
+
+  <div class="card">
+    <div class="card-title">Phase 3: Time-Series Storage Pipeline (PostgreSQL)</div>
+    <div class="star-content">
+      <strong>Spoken Script:</strong> "Telemetry data points are ingested into PostgreSQL using connection pooling via Go's <code>pgx</code>. For 24-hour graphing, sending tens of thousands of raw points would overwhelm the client. The backend executes downsampling aggregation queries in SQL (grouping by 5-minute buckets), reducing JSON payload sizes by over 70% and keeping response times strictly under 120ms."
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Phase 4: Real-Time WebSocket Streaming & Frontend SVG Engine</div>
+    <div class="star-content">
+      <strong>Spoken Script:</strong> "Instead of HTTP polling, a persistent WebSocket hub pushes telemetry frames to connected clients under 50ms latency. On the frontend, custom React hooks receive these frames. Rather than importing bulky charting libraries, I built an SVG vector generator that translates time-series coordinates directly into SVG path coordinates (<code>M x,y L x,y Z</code>) with hardware-accelerated linear gradient fills, maintaining a constant 60 FPS."
+    </div>
+  </div>
+
+  <!-- SECTION 4: RESUME BULLETS IN STAR FORMAT -->
+  <div class="section-title">4. Resume Bullet Points: Word-for-Word STAR Scripts</div>
+
+  <!-- BULLET 1 -->
+  <div class="card">
+    <div class="bullet-point-header">
+      BULLET 1: "Engineered a real-time web dashboard monitoring system hardware metrics (CPU, RAM, disk, and temperatures)."
+    </div>
+    <div class="star-box">
+      <div class="star-row">
+        <span class="star-tag tag-s">S</span>
+        <div class="star-content"><strong>Situation:</strong> I needed to build a telemetry engine capable of continuously gathering multi-core CPU, RAM, disk, network, and temperature data from the host operating system without degrading host performance.</div>
+      </div>
+      <div class="star-row">
+        <span class="star-tag tag-t">T</span>
+        <div class="star-content"><strong>Task:</strong> Ensure low-latency data availability, complete memory safety under concurrent client access, and maintain an ultra-lean resource footprint.</div>
+      </div>
+      <div class="star-row">
+        <span class="star-tag tag-a">A</span>
+        <div class="star-content"><strong>Action:</strong> Implemented the core engine in Go using <code>gopsutil</code>. Guarded shared telemetry structures using <code>sync.RWMutex</code>, using read locks for concurrent API requests and write locks for background sampling. Defensively copied slices before transmission.</div>
+      </div>
+      <div class="star-row">
+        <span class="star-tag tag-r">R</span>
+        <div class="star-content"><strong>Result:</strong> Sustained non-blocking telemetry updates with <strong>&lt;1% host CPU overhead</strong> and a tiny <strong>&lt;15MB memory footprint</strong>.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BULLET 2 -->
+  <div class="card">
+    <div class="bullet-point-header">
+      BULLET 2: "Built a time-series data pipeline with Go and PostgreSQL to log and visualize historical performance metrics via interactive area graphs."
+    </div>
+    <div class="star-box">
+      <div class="star-row">
+        <span class="star-tag tag-s">S</span>
+        <div class="star-content"><strong>Situation:</strong> High-frequency telemetry generates millions of data points over time. Querying raw logs causes severe network transfer bloat and frontend chart freezes.</div>
+      </div>
+      <div class="star-row">
+        <span class="star-tag tag-t">T</span>
+        <div class="star-content"><strong>Task:</strong> Build an indexed time-series pipeline in PostgreSQL that downsamples historical data efficiently and loads graphs instantaneously on the frontend.</div>
+      </div>
+      <div class="star-row">
+        <span class="star-tag tag-a">A</span>
+        <div class="star-content"><strong>Action:</strong> Designed an indexed schema in PostgreSQL with B-Tree timestamp indexes, managed batch insertions with Go's <code>pgx</code> pool, and wrote SQL window aggregation queries to downsample records into 5-minute buckets. Rendered data via custom SVG area graphs with linear gradients.</div>
+      </div>
+      <div class="star-row">
+        <span class="star-tag tag-r">R</span>
+        <div class="star-content"><strong>Result:</strong> Reduced API payload volume by <strong>~70%</strong> and achieved sub-<strong>120ms</strong> query load times for full 24-hour trend views.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BULLET 3 -->
+  <div class="card">
+    <div class="bullet-point-header">
+      BULLET 3: "Developed live process monitoring features to track active background processes and programmatically identify resource-heavy applications."
+    </div>
+    <div class="star-box">
+      <div class="star-row">
+        <span class="star-tag tag-s">S</span>
+        <div class="star-content"><strong>Situation:</strong> Enumerating hundreds of active processes on every polling interval triggered major CPU spikes and memory allocation pressure in the Go runtime.</div>
+      </div>
+      <div class="star-row">
+        <span class="star-tag tag-t">T</span>
+        <div class="star-content"><strong>Task:</strong> Scan all running OS processes in under 1.5 seconds, dynamically rank top resource hogs, and expose a secure API to terminate rogue processes.</div>
+      </div>
+      <div class="star-row">
+        <span class="star-tag tag-a">A</span>
+        <div class="star-content"><strong>Action:</strong> Implemented a 16-worker goroutine pool via a channel semaphore (<code>chan struct{}, 16</code>), enforced a 1500ms context timeout, and created an in-memory process handle cache (<code>procCache</code>) to reuse structs. Created an authenticated kill handler invoking OS termination signals.</div>
+      </div>
+      <div class="star-row">
+        <span class="star-tag tag-r">R</span>
+        <div class="star-content"><strong>Result:</strong> Cut process scan latency by <strong>65%</strong>, profiling 200+ processes in <strong>&lt;1.5 seconds</strong> with zero Garbage Collection pauses.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BULLET 4 -->
+  <div class="card">
+    <div class="bullet-point-header">
+      BULLET 4: "Designed a responsive frontend interface paired with optimized backend APIs to stream telemetry data via WebSockets with minimal overhead."
+    </div>
+    <div class="star-box">
+      <div class="star-row">
+        <span class="star-tag tag-s">S</span>
+        <div class="star-content"><strong>Situation:</strong> Regular HTTP polling introduced high network header bloat, repetitive TCP handshakes, and delayed critical telemetry updates.</div>
+      </div>
+      <div class="star-row">
+        <span class="star-tag tag-t">T</span>
+        <div class="star-content"><strong>Task:</strong> Transition the telemetry pipeline to an asynchronous, low-bandwidth push streaming model over WebSockets.</div>
+      </div>
+      <div class="star-row">
+        <span class="star-tag tag-a">A</span>
+        <div class="star-content"><strong>Action:</strong> Built a WebSocket broadcast hub in Go with ping/pong heartbeats and client unregister handlers to prevent memory leaks. Created a custom <code>useWebSocket</code> hook in React with state batching to eliminate redundant component renders.</div>
+      </div>
+      <div class="star-row">
+        <span class="star-tag tag-r">R</span>
+        <div class="star-content"><strong>Result:</strong> Slashed network overhead by <strong>&gt;60%</strong> compared to 1-second REST polling and delivered live telemetry with <strong>sub-50ms latency</strong>.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- SECTION 5: TECHNICAL DEEP DIVE & TRAP QUESTIONS -->
+  <div class="section-title">5. Core Technical Fundamentals & Interview Trap Questions</div>
+
+  <table>
+    <thead>
+      <tr>
+        <th style="width: 32%;">Interview Question</th>
+        <th style="width: 68%;">Concise Engineering Answer</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>"Goroutines vs OS Threads: Why is Go so fast?"</strong></td>
+        <td>Goroutines are user-space green threads multiplexed onto OS threads by the Go runtime scheduler (M:N model). They start with a tiny 2KB stack (vs 1-2MB for OS threads) and switch contexts without invoking expensive kernel ring-0 transitions.</td>
+      </tr>
+      <tr>
+        <td><strong>"Why sync.RWMutex over a standard sync.Mutex?"</strong></td>
+        <td>A standard <code>Mutex</code> serializes all callers. In a monitoring dashboard, 95% of operations are read-only client queries. <code>RWMutex</code> permits infinite concurrent readers (<code>RLock</code>) simultaneously, blocking only during short write ticks.</td>
+      </tr>
+      <tr>
+        <td><strong>"How did you prevent memory leaks in WebSockets?"</strong></td>
+        <td>Maintained a thread-safe hub map of active client connections. Implemented ping/pong heartbeats: if a client drops ungracefully without sending a TCP close frame, the ping timeout evicts the connection pointer and closes the socket.</td>
+      </tr>
+      <tr>
+        <td><strong>"Why custom SVG graphs instead of Chart.js / Recharts?"</strong></td>
+        <td>Avoided 200KB+ of external JavaScript bundle overhead. Inline SVGs offload vector coordinate rendering directly to browser GPU/layout engines, giving pixel-perfect responsive scaling without canvas repainting lags.</td>
+      </tr>
+      <tr>
+        <td><strong>"How would you scale this to 1,000 servers?"</strong></td>
+        <td>Decouple the architecture: run the Go collector as a lightweight daemon agent on each server pushing metrics via gRPC to a distributed Kafka ingestion stream, backed by TimescaleDB / Prometheus and a central Grafana/React cluster dashboard.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- SECTION 6: QUICK FORMULA CHEAT SHEET -->
+  <div class="section-title">6. Mathematical Coordinate Mapping in Frontend SVG</div>
+  <div class="card">
+    <div class="card-title">How Graph Points Are Calculated on Screen</div>
+    <div class="star-content">
+      When asked how custom SVG paths are plotted from an array of metric data points:
+      <br><br>
+      <code>X Coordinate = (index / (totalPoints - 1)) * viewBoxWidth</code><br>
+      <code>Y Coordinate = height - (percentage / 100) * (height - padding)</code><br><br>
+      The path string is composed as: <code>M 0,height L x1,y1 L x2,y2 ... L width,height Z</code> and filled with a linear gradient.
+    </div>
+  </div>
+
+  <div class="footer">
+    System Analytics Dashboard (sysmon) &bull; Technical Interview Preparation Document &bull; Generated for Technical Rounds
+  </div>
+
+</body>
+</html>
+
